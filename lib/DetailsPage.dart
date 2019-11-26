@@ -14,6 +14,9 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage>{
+
+  var selectedCard = 'WEIGHT';
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -174,12 +177,25 @@ class _DetailsPageState extends State<DetailsPage>{
                            )
 
                          ],
-
+                       ),
+                       SizedBox(height: 20,),
+                       Container(
+                        height: 150,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: <Widget>[
+                            _buildIfoCard('hignt', '300c', 'G'),
+                            SizedBox(width: 10,),
+                            _buildIfoCard('low', '400c', 'G'),
+                            SizedBox(width: 10,),
+                            _buildIfoCard('asdasd', '300c', 'G'),
+                            SizedBox(width: 10,),
+                            _buildIfoCard('ada', '300c', 'G'),
+                          ],
+                        ),
                        )
                      ],
-
                    ),
-
                  )
             ],
           )
@@ -187,4 +203,79 @@ class _DetailsPageState extends State<DetailsPage>{
       ),
     );
   }
+
+  Widget _buildIfoCard(String cardTitle,String info, String unit){
+
+    return InkWell(
+      onTap: (){
+        SelectCard(cardTitle);
+      },
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeIn,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: cardTitle == selectedCard ? Color(0xFF7A9BEE) : Colors.white,
+          border: Border.all(
+            color: cardTitle == selectedCard ? Colors.transparent : Colors.grey.withOpacity(0.3),
+            style: BorderStyle.solid,
+            width: 0.75
+          ),
+        ),
+        height: 100,
+        width: 100,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              cardTitle,
+              style: TextStyle(
+                fontFamily: 'Montserrat',
+                fontSize: 14,
+                color: cardTitle == selectedCard ? Colors.white : Colors.black,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 15.0, bottom: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    info,
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 12,
+                      color: cardTitle == selectedCard ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  Text(
+                    unit,
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 12,
+                      color: cardTitle == selectedCard ? Colors.white : Colors.black,
+                    ),
+                  )
+
+
+                ],
+              ),
+
+
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+
+  SelectCard(cardTitle){
+    setState(() {
+      selectedCard = cardTitle;
+    });
+  }
 }
+

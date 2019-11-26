@@ -102,7 +102,22 @@ class _MyHomePageState extends State<MyHomePage> {
               primary: false,
               padding: EdgeInsets.only(left: 25.0, right: 25.0),
               children: <Widget>[
-                
+                  Padding(
+                    padding: EdgeInsets.only(top: 45.0),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height - 300,
+                      child: ListView(
+                        children: <Widget>[
+                          _bulidFoodItem('assets/plate1.png', "dish 1", "\$ 50.00"),
+                          _bulidFoodItem('assets/plate2.png', "dish 2", "\$ 24.00"),
+                          _bulidFoodItem('assets/plate3.png', "dish 3", "\$ 10.00"),
+                          _bulidFoodItem('assets/plate4.png', "dish 4", "\$ 100.00"),
+                          _bulidFoodItem('assets/plate5.png', "dish 5", "\$ 60.00"),
+                          _bulidFoodItem('assets/plate6.png', "dish 6", "\$ 77.00"),
+                        ],
+                      ),
+                    ),
+                  )
               ],
             ),
           )
@@ -110,4 +125,60 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+Widget _bulidFoodItem(String imgPath, String foodName, String prince){
+  return Padding(
+    padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+    child: InkWell(
+      onTap: () {},
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+            child: Row(
+              children: <Widget>[
+                Hero(
+                  tag: imgPath,
+                  child: Image(
+                      image: AssetImage(imgPath),
+                      fit: BoxFit.cover,
+                      height: 75.0,
+                      width: 75.0
+                  ),
+                ),
+                SizedBox(width: 10.0,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      foodName,
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    Text(
+                      foodName,
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 15.0,
+                          color: Colors.grey
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.add),
+            color: Colors.black,
+            onPressed: () {},
+          )
+        ],
+      ),
+    ),
+  );
 }
